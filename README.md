@@ -17,7 +17,7 @@
   - [**4. Establish Alarm Manager To Fire Notifications**](#4-establish-alarm-manager-to-fire-notifications)
     - [**4.1. Create Notification Channel**](#41-create-notification-channel)
     - [**4.2. Configure Alarm Manager to send lockscreen-styled notification**](#42-configure-alarm-manager-to-send-lockscreen-styled-notification)
-  - [**5. define Lockscreen Receiver**](#5-define-lockscreen-receiver)
+  - [**5. Define Lockscreen Receiver**](#5-define-lockscreen-receiver)
   - [**6. Run code in Home screen**](#6-run-code-in-home-screen)
   - [**7. Write Activity Layout**](#7-write-activity-layout)
 - [**Document**](#document)
@@ -155,7 +155,7 @@ To send lockscreen-styled notification at 08h00 every day. Take the code below a
     }
 ```
 
-## [**5. define Lockscreen Receiver**](#5-define-lockscreen-receiver)
+## [**5. Define Lockscreen Receiver**](#5-define-lockscreen-receiver)
 
 This lockscreen reveicer works like any `Broadcast Receiver`. Only one thing which we need to take note that  we only send the lockscreen-styled notification when device sleeps or device has been locked.
 
