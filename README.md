@@ -28,7 +28,7 @@
 
 Have you ever seen applications that can send their notification that overrides device's lookscreen?
 
-Perhaps, you are thinking that it is complicated to impletement this function. Don't worry, because together, we will go into detail to build this function. Generally speaking, it is just sending normal notification and the difference is content of notification. Here is an activity instead of a notification.
+Perhaps, you are thinking that it is complicated to impletement this function. Don't worry, because together, we will go into detail to build this function. Generally speaking, it is just send normal notification and the difference is content of notification. Here is an activity instead of a notification.
 
 <p align="center">
     <img src="./photo/photo_01.png" width="320" />
