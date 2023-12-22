@@ -10,15 +10,18 @@
 # [**Table Of Content**](#table-of-content)
 - [**Table Of Content**](#table-of-content)
 - [**Introduction**](#introduction)
-- [**IMPLEMENTATION**](#implementation)
+- [**Implementation**](#implementation)
   - [**1. Define permissions in Android Manefest**](#1-define-permissions-in-android-manefest)
   - [**2. Define Activity In Android Manifest**](#2-define-activity-in-android-manifest)
   - [**3. Define Special Theme For Activity**](#3-define-special-theme-for-activity)
   - [**4. Establish Alarm Manager To Fire Notifications**](#4-establish-alarm-manager-to-fire-notifications)
-    - [**4.1. Create Notification Channel**\*](#41-create-notification-channel)
-    - [4.2. Configure Alarm Manager to send lockscreen-styled notification](#42-configure-alarm-manager-to-send-lockscreen-styled-notification)
+    - [**4.1. Create Notification Channel**](#41-create-notification-channel)
+    - [**4.2. Configure Alarm Manager to send lockscreen-styled notification**](#42-configure-alarm-manager-to-send-lockscreen-styled-notification)
   - [**5. Defind Lockscreen Receiver**](#5-defind-lockscreen-receiver)
-- [Made with 💘 and KOTLIN ](#made-with--and-kotlin-)
+  - [**6. Run code in Home screen**](#6-run-code-in-home-screen)
+- [**Document**](#document)
+- [**Post Script**](#post-script)
+- [**Made with 💘 and KOTLIN**](#made-with--and-kotlin)
 
 # [**Introduction**](#introduction)
 
@@ -34,7 +37,7 @@ Perhaps, you are think that it is complicated to impletement this function. Don'
 ***LOOK LIKE AS DEVICE'S LOCKSCREEN? ACTUALLY, IT IS A NOTIFICATION 😊***
 </h3>
 
-# [**IMPLEMENTATION**](#implementation)
+# [**Implementation**](#implementation)
 
 ## [**1. Define permissions in Android Manefest**](#1-define-permission-in-android)
 
@@ -95,7 +98,7 @@ Last but not least, the theme below is important to apply to the activity. To de
 ```
 
 ## [**4. Establish Alarm Manager To Fire Notifications**](#4-establish-alarm-manager-to-fire-notifications)
-### [**4.1. Create Notification Channel***](#41-create-notification-channel)
+### [**4.1. Create Notification Channel**](#41-create-notification-channel)
 
 ```
     /**
@@ -123,7 +126,7 @@ If you want to send other normal notifications then create extra notification. N
 
 You can defile `LOCKSCREEN_CHANNED_ID` and `NOTIFICATION_CHANNED_ID` to send both normal notifications & lockscreen-styled notifications.
 
-### [4.2. Configure Alarm Manager to send lockscreen-styled notification](#42-configure-alarm-manager-to-send-lockscreen-styled-notification)
+### [**4.2. Configure Alarm Manager to send lockscreen-styled notification**](#42-configure-alarm-manager-to-send-lockscreen-styled-notification)
 
 To send lockscreen-styled notification at 08h00 every day. Take the code below as sample
 
@@ -133,6 +136,8 @@ To send lockscreen-styled notification at 08h00 every day. Take the code below a
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val alarmTime = Calendar.getInstance()
         val now = Calendar.getInstance()
+
+
         alarmTime.timeInMillis = System.currentTimeMillis()
         alarmTime[Calendar.HOUR] = 8
         alarmTime[Calendar.MINUTE] = 0
@@ -267,4 +272,61 @@ Lastly, don't forget define `Lockscreen Receiver` in Android Manifest
     </receiver>
 ```
 
-# [Made with 💘 and KOTLIN <img src="https://www.vectorlogo.zone/logos/kotlinlang/kotlin-ar21.svg" width="60">](#made-with-love-and-kotlin)
+
+
+## [**6. Run code in Home screen**](#6-run-code-in-home-screen)
+
+We need to ask users to give us notification run-time permission.
+
+```
+    private fun setupNotification() {
+        //1. Request POST NOTIFICATION permission if device has Android OS from 13
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val isAccessed: Boolean = PermissionUtil.isNotiEnabled(context = requireContext())
+            if (!isAccessed) {
+                permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+
+
+        //2. Create lockscreen-styled notification and send it every day
+        LockscreenManager.createNotificationChannel(context = requireContext())
+        LockscreenManager.setupDailyLockscreenNotification(context = requireContext())
+    }
+```
+
+Before you do, define `ActivityResultLauncher` like below:
+
+```
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    private val permissionLauncher: ActivityResultLauncher<String> = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isAccessed ->
+        if (isAccessed) {
+            LockscreenManager.setupDailyLockscreenNotification(requireContext())
+        } else {
+            if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                openRationaleDialog()
+            } else {
+                openSettingDialog()
+            }
+        }
+    }
+```
+
+If users reject our request, we should show rationale dialog to expand them why we need these permission. Both 
+`openRationaleDialog` and `openSettingDialog` are used for this purpose. You can write yourself if you need, they are optional.
+
+# [**Document**](#document)
+
+I have pasted package named `notification` to help you do this function easier. You can open this package to see full code 💕💕💕💕.
+
+# [**Post Script**](#post-script)
+
+Probably we are not even living in the same country. We look different. We speak different languages. Maybe we are from entirely different generations. We are just complete strangers.
+
+But there is something that connects us. We both have great taste in getting programming.
+
+Thank you for being here. God bless you, whoever you are ✌️😎
+
+# [**Made with 💘 and KOTLIN**](#made-with-love-and-kotlin)
