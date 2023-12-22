@@ -28,7 +28,7 @@
 
 Have you ever seen applications that can send their notification that overrides device's lookscreen?
 
-Perhaps, you are think that it is complicated to impletement this function. Don't worry, because together, we will go into detail to build this function. Generally speaking, it is just sending normal notification and the difference is content of notification. Here is an activity instead of a notification.
+Perhaps, you are thinking that it is complicated to impletement this function. Don't worry, because together, we will go into detail to build this function. Generally speaking, it is just sending normal notification and the difference is content of notification. Here is an activity instead of a notification.
 
 <p align="center">
     <img src="./photo/photo_01.png" width="320" />
@@ -123,7 +123,7 @@ Last but not least, the theme below is important to apply to the activity. To de
 
 We have to set importance equals `NotificationManager.IMPORTANCE_HIGH` or `NotificationManager.IMPORTANCE_MAX` to ensure that the lockscreen activity can override device's lockscreen.
 
-If you want to send other normal notifications then create extra notification. Never use the same channel with lockscreen-styled notifications.
+If you want to send other normal notifications then create another notification channel. Never use the same channel with lockscreen-styled notifications.
 
 You can define `LOCKSCREEN_CHANNED_ID` and `NOTIFICATION_CHANNED_ID` to send both normal notifications & lockscreen-styled notifications.
 
