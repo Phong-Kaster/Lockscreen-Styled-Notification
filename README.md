@@ -1,5 +1,5 @@
 <h1 align="center">Lockscreen-styled Notification<br/>
-   Send a notification that looks like as the lockscreen of device
+   Send a notification that looks like the lockscreen of device
 </h1>
 
 <p align="center">
@@ -17,7 +17,7 @@
   - [**4. Establish Alarm Manager To Fire Notifications**](#4-establish-alarm-manager-to-fire-notifications)
     - [**4.1. Create Notification Channel**](#41-create-notification-channel)
     - [**4.2. Configure Alarm Manager to send lockscreen-styled notification**](#42-configure-alarm-manager-to-send-lockscreen-styled-notification)
-  - [**5. Defind Lockscreen Receiver**](#5-defind-lockscreen-receiver)
+  - [**5. define Lockscreen Receiver**](#5-define-lockscreen-receiver)
   - [**6. Run code in Home screen**](#6-run-code-in-home-screen)
   - [**7. Write Activity Layout**](#7-write-activity-layout)
 - [**Document**](#document)
@@ -28,21 +28,21 @@
 
 Have you ever seen applications that can send their notification that overrides device's lookscreen?
 
-Perhaps, you are think that it is complicated to impletement this function. Don't worry, because together, we will go into detail to build this function. Generally speaking, it is just sending normal notification and the different is content of the notification. Here is an activity instead of a notification.
+Perhaps, you are think that it is complicated to impletement this function. Don't worry, because together, we will go into detail to build this function. Generally speaking, it is just sending normal notification and the difference is content of notification. Here is an activity instead of a notification.
 
 <p align="center">
     <img src="./photo/photo_01.png" width="320" />
 </p>
 <h3 align="center">
 
-***LOOK LIKE AS DEVICE'S LOCKSCREEN? ACTUALLY, IT IS A NOTIFICATION 😊***
+***LOOK LIKE DEVICE'S LOCKSCREEN? ACTUALLY, IT IS A NOTIFICATION 😊***
 </h3>
 
 # [**Implementation**](#implementation)
 
 ## [**1. Define permissions in Android Manefest**](#1-define-permission-in-android)
 
-First of all, to send notifications. We need some run-time permissions to can access system and schedule what content and when we send notifications. There permissions below is all we need to do it
+First of all, to send notifications, we need some run-time permissions to can access system and schedule what content and when we send notifications. The permissions below is all we need to do it
 
 ```
 <!-- For firing notification on Android 13 -->
@@ -62,9 +62,9 @@ From Android 13 & higher, we need to define `POST_NOTIFICATIONS` permission beca
  
 To send notifications at 8 am every single day, for instance. I use `Alarm Manager` to schedule in Android system. So that, `SCHEDULE_EXACT_ALARM` & `USE_EXACT_ALARM` are necessary to use this Alarm Manager properly.
 
-## [**2. Define Activity In Android Manifest**](#2-defind-activity-in-android-manifest)
+## [**2. Define Activity In Android Manifest**](#2-define-activity-in-android-manifest)
 
-To show an activity that overrides in device's lockscreen. Of course, we have to defind activity in Android Manifest. However, this activiy is special when its background is transparent and only its content is shown so that we need to add some attributes like the following example below
+To show an activity that overrides device's lockscreen. Of course, we have to define activity in Android Manifest. However, this activiy is special when its background is current wallpaper of device that we need to add some attributes like the following example below
 
 ```
 <activity
@@ -125,7 +125,7 @@ We have to set importance equals `NotificationManager.IMPORTANCE_HIGH` or `Notif
 
 If you want to send other normal notifications then create extra notification. Never use the same channel with lockscreen-styled notifications.
 
-You can defile `LOCKSCREEN_CHANNED_ID` and `NOTIFICATION_CHANNED_ID` to send both normal notifications & lockscreen-styled notifications.
+You can define `LOCKSCREEN_CHANNED_ID` and `NOTIFICATION_CHANNED_ID` to send both normal notifications & lockscreen-styled notifications.
 
 ### [**4.2. Configure Alarm Manager to send lockscreen-styled notification**](#42-configure-alarm-manager-to-send-lockscreen-styled-notification)
 
@@ -155,12 +155,12 @@ To send lockscreen-styled notification at 08h00 every day. Take the code below a
     }
 ```
 
-## [**5. Defind Lockscreen Receiver**](#5-defind-lockscreen-receiver)
+## [**5. define Lockscreen Receiver**](#5-define-lockscreen-receiver)
 
-This lockscreen reveicer works any BroadcastReceiver. Only one thing we need to take note that, we only send the lockscreen-styled when device sleeps or device has locked.
+This lockscreen reveicer works like any `Broadcast Receiver`. Only one thing which we need to take note that  we only send the lockscreen-styled notification when device sleeps or device has been locked.
 
 
-If device is being used by users, we will send a normal notification instead. Below is a good broadcast receiver that you can reference
+If device is being used by users, we'll send a normal notification instead. Below is a good broadcast receiver that you can reference
 
 ```
 class LockscreenReceiver: BroadcastReceiver() {
@@ -259,7 +259,7 @@ class LockscreenReceiver: BroadcastReceiver() {
 }
 ```
 
-Lastly, don't forget define `Lockscreen Receiver` in Android Manifest
+Lastly, don't forget to define `Lockscreen Receiver` in Android Manifest
 
 ```
     <!-- For Lockscreen Receiver -->
@@ -315,12 +315,12 @@ Before you do, define `ActivityResultLauncher` like below:
     }
 ```
 
-If users reject our request, we should show rationale dialog to expand them why we need these permission. Both 
+If users reject our request, we should show rationale dialog to expand them why we need these permissions. Both 
 `openRationaleDialog` and `openSettingDialog` are used for this purpose. You can write yourself if you need, they are optional.
 
 ## [**7. Write Activity Layout**](#7-write-activity-layout)
 
-To override our activity to lockscreen, we need run this function as soon as `onCreate` runs
+To set up our activity shown as device's lockscreen, we need run this function as soon as `onCreate` runs
 
 ```
      override fun onCreate(savedInstanceState: Bundle?) {
