@@ -19,6 +19,7 @@
     - [**4.2. Configure Alarm Manager to send lockscreen-styled notification**](#42-configure-alarm-manager-to-send-lockscreen-styled-notification)
   - [**5. Defind Lockscreen Receiver**](#5-defind-lockscreen-receiver)
   - [**6. Run code in Home screen**](#6-run-code-in-home-screen)
+  - [**7. Write Activity Layout**](#7-write-activity-layout)
 - [**Document**](#document)
 - [**Post Script**](#post-script)
 - [**Made with 💘 and KOTLIN**](#made-with--and-kotlin)
@@ -316,6 +317,37 @@ Before you do, define `ActivityResultLauncher` like below:
 
 If users reject our request, we should show rationale dialog to expand them why we need these permission. Both 
 `openRationaleDialog` and `openSettingDialog` are used for this purpose. You can write yourself if you need, they are optional.
+
+## [**7. Write Activity Layout**](#7-write-activity-layout)
+
+To override our activity to lockscreen, we need run this function as soon as `onCreate` runs
+
+```
+     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableLockscreen()
+    }
+
+    private fun enableLockscreen() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+        } else {
+            val window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON)
+        }
+    }
+```
+
+The `enableLockscreen` is answer for the issue that I mention above. Because, this is an activity that you can arrange any content you want.
+
+<p align="center">
+    <img src="./photo/photo_02.png" width="1280" />
+ 
+</p>
+<h3 align="center">
+
+***A SAMPLE LAYOUT THAT WRITTEN BY JETPACK COMPOSE😊***
+</h3>
 
 # [**Document**](#document)
 
