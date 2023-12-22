@@ -11,7 +11,7 @@
 - [**Table Of Content**](#table-of-content)
 - [**Introduction**](#introduction)
 - [**Implementation**](#implementation)
-  - [**1. Define permissions in Android Manefest**](#1-define-permissions-in-android-manefest)
+  - [**1. Define permissions in Android Manifest**](#1-define-permissions-in-android-manifest)
   - [**2. Define Activity In Android Manifest**](#2-define-activity-in-android-manifest)
   - [**3. Define Special Theme For Activity**](#3-define-special-theme-for-activity)
   - [**4. Establish Alarm Manager To Fire Notifications**](#4-establish-alarm-manager-to-fire-notifications)
@@ -40,7 +40,7 @@ Perhaps, you are think that it is complicated to impletement this function. Don'
 
 # [**Implementation**](#implementation)
 
-## [**1. Define permissions in Android Manefest**](#1-define-permission-in-android)
+## [**1. Define permissions in Android Manifest**](#1-define-permissions-in-android-manifest)
 
 First of all, to send notifications, we need some run-time permissions to can access system and schedule what content and when we send notifications. The following permissions are all we need to do it
 
