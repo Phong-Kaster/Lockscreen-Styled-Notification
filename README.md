@@ -42,7 +42,7 @@ Perhaps, you are think that it is complicated to impletement this function. Don'
 
 ## [**1. Define permissions in Android Manefest**](#1-define-permission-in-android)
 
-First of all, to send notifications, we need some run-time permissions to can access system and schedule what content and when we send notifications. The permissions below is all we need to do it
+First of all, to send notifications, we need some run-time permissions to can access system and schedule what content and when we send notifications. The following permissions are all we need to do it
 
 ```
 <!-- For firing notification on Android 13 -->
